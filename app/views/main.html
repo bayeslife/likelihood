@@ -1,0 +1,52 @@
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-16">
+         <header/>
+      </div>
+   </div>
+   <div class="row" >
+      <div class="col-md-16">
+         <h2>Choose a dataset <a href="" ng-click="addDataSet()">+</a></h2>
+         <table class="table">
+            <thead>
+               <tr>
+                  <th>Organization</th>
+                  <th>Name</th>
+               </tr>
+            </thead>
+            <tr ng-repeat="dataset in datasets">
+               <td>{{dataset.organisation}}</td>
+               <td>{{dataset.name}}</td>
+               <td><a href="/#/likelihood/{{dataset._id}}">View</a></td>
+               <td><a class="action" href="" ng-click="selectDataSet(dataset)">Select</a></td>
+                <td><a class="action" href="" ng-click="updateDataSet(dataset)">Update</a></td>
+                <td><a class="action" href="" ng-click="removeDataSet(dataset)">Delete</a></td>
+            </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-16"style="background-color: lightgrey">
+         <form ng-if="selectedDataSet" name="edit">
+            <table>
+               <tr>
+                  <td>
+                     <input data-ng-model="selectedDataSet.name" type="text"/>
+                  </td>                 
+               </tr>
+               <tr>
+                  <td>
+                     <input data-ng-model="selectedDataSet.organisation" type="text"/>
+                  </td>
+               </tr>
+            </table>
+         </form>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-16">
+         <footer/>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,18 @@
+[
+	{	
+		"id": "c1",	
+		"capability":"Online Order Capability",
+		"description":"Develop web portal presence  or  engage with vendor to deliver"
+	},
+	{
+		"id": "c2",
+		"capability":"CRM",
+		"description":"Managing customer contacts and manual work in progress"		
+	},
+	{
+		"id": "c3",
+		"capability":"Identity Provider",
+		"description":"Capability to identify a customer"
+	}
+
+]

@@ -1,0 +1,164 @@
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-16">
+         <header val="selectedDataSet.name"/>
+      </div>
+   </div>
+   <div class="row" >
+      <div class="col-md-4">
+         <h4>Capabilities <a href="" ng-click="addCapability()">+</a></h4>
+         <li class="griditem" ng-repeat="c in capabilities">                            
+            <a  ng-if="selectedCapability===c" href="" class="selected" data-ng-click="selectCapability(c)">{{c.capability}} </a>
+            <a ng-if="selectedCapability!==c" href="" ng-click="selectCapability(c)">{{c.capability}}</a> 
+            [{{hypothesisMap[c.decision].name}}]
+            <span ng-if="c.posterior<51" class="warning">{{c.posterior}}</span> 
+            <span ng-if="c.posterior>=51">{{c.posterior}}</span>
+         </li>
+      </div>
+      <div class="col-md-4">
+         <h4>Hypothesis <a href="" ng-click="addHypothesis()">+</a></h4>
+         <div ng-repeat="h in hypothesises">                            
+            <a ng-if="selectedHypothesis===h" href="" class="selected" ng-click="selectHypothesis(h)">{{h.name}}</a>
+            <a ng-if="selectedHypothesis!==h" href="" ng-click="selectHypothesis(h)">{{h.name}}</a>   
+         </div>
+      </div>
+      <div class="col-md-4" >
+         <h4>Considerations <a href="" ng-click="addConsideration()">+</a>   </h4>
+         <li class="griditem" ng-repeat="c in considerations">                                
+            <a ng-if="selectedConsideration===c" href="" class="selected" ng-click="selectConsideration(c)">{{c.name}}</a>                                
+            <a ng-if="selectedConsideration!==c" href="" ng-click="selectConsideration(c)">{{c.name}}</a>
+         </li>
+      </div>
+   </div>
+   <div class="row" style="background-color: lightgrey">
+      <div  class="col-md-4">
+         <form ng-if="selectedCapability" name="edit">
+            <table>
+               <tr>
+                  <td><input data-ng-model="selectedCapability.capability" type="text"/></td>
+                  <td><a class="action" ng-if="selectedCapability" href="" ng-click="updateCapability(selectedCapability)">=</a></td>
+                  <td><a class="action" ng-if="selectedCapability" href="" ng-click="removeCapability(selectedCapability)">-</a></td>
+               </tr>
+               <tr>
+                  <td><textarea rows="3" cols="35" data-ng-model="selectedCapability.description" type="text"/></td>
+               </tr>
+               <tr>
+                  <td>
+                     <select data-ng-model="selectedCapability.decision">
+                        <option ng-repeat="h in hypothesises" value="{{h.id}}" >{{h.name}}</option>
+                     </select>
+                  </td>
+               </tr>
+            </table>
+         </form>
+      </div>
+      <div class="col-md-4">
+         <form ng-if="selectedHypothesis" name="edit">
+            <table>
+               <tr>
+                  <td><input data-ng-model="selectedHypothesis.name" type="text"/></td>
+                  <td><a class="action" href="" ng-if="selectedHypothesis" ng-click="updateHypothesis(selectedHypothesis)">=</a></td>
+                  <td><a class="action" href="" ng-if="selectedHypothesis" ng-click="removeHypothesis(selectedHypothesis)">-</a></td>
+               </tr>
+               <tr>
+                  <td><textarea rows="3" cols="35" data-ng-model="selectedHypothesis.description" type="text"/><br/></td>
+               </tr>
+
+            </table>
+         </form>
+      </div>
+      <div class="col-md-4" >
+         <form ng-if="selectedConsideration" name="edit">
+            <table>
+               <tr>
+                  <td><input ng-model="selectedConsideration.name" type="text"/></td>
+                  <td><a class="action" href="" ng-if="selectedConsideration" ng-click="updateConsideration(selectedConsideration)">=</a></td>
+                  <td><a class="action" href="" ng-if="selectedConsideration" ng-click="removeConsideration(selectedConsideration)">-</a>    </td>
+               </tr>
+               <tr>
+                  <td>Description:<Br/><textarea rows="3" cols="35" ng-model="selectedConsideration.description" type="text"/><br/></td>
+               </tr>
+               <tr>
+                  <td>Measured<Br/><textarea rows="3" cols="35" ng-model="selectedConsideration.measured" type="text"/><br/></td>
+               </tr>
+            </table>
+         </form>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-4" >
+         <span ng-if="selectedDecision">
+            <h4>Correlations</h4>
+            <div>
+               <li class="griditem" title="{{c.description}}" class="correlation"  ng-repeat="c in considerations">
+                  <div ng-if="!selectedConsideration || c.id == selectedConsideration.id">
+                     <span ng-if="selectedDecisionIsActive">{{c.name}}</span>
+                     <span ng-if="!selectedDecisionIsActive" class="deemphasized">{{c.name}}</span>
+                     <input id="checkHypothesisCapability" type="checkbox" ng-checked="checkCorrelation(selectedCapability,selectedHypothesis,c)" ng-click="setCorrelation(selectedCapability,selectedHypothesis,c)">
+                  </div>
+               </li>
+            </div>
+         </span>
+      </div>
+      <div class="col-md-4" >
+         <span ng-if="selectedDecision">
+            <h4>Candidate Decision</h4>
+            {{selectedHypothesis.name}} - {{selectedCapability.capability}}
+            <form  name="edit">
+               <table>
+                  <tr>
+                     <td>
+                        Prior<br/>
+                        <input ng-model="selectedDecision.prior" type="text"/><br/>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Examples<br/>
+                        <textarea rows="3" cols="35" ng-model="selectedDecision.examples" type="text"/><br/>
+                     </td>
+                  </tr>
+               </table>
+            </form>
+         </span>
+      </div>
+      <div class="col-md-4">
+         <span ng-if="selectedConsideration">
+            <h4>Likelihood</h4>
+            <table class="table" >
+               <thead>
+                  <th>Hypothesis</th>
+                  <th>Capability</th>
+                  <th >Likelihood</th>
+               </thead>
+               <tr ng-repeat="h in hypothesises">
+                  <td>{{h.name}}</td>
+                  <td>
+                     <div ng-repeat="c in correlatedCapabilities(h,selectedConsideration)[0]">
+                        {{c.capability}}    
+                     </div>
+                     <div ng-repeat="c in correlatedCapabilities(h,selectedConsideration)[1]">
+                        <span style="color: lightgrey">{{c.capability}}</span>
+                     </div>
+                  </td>
+                  <td>
+                     <div title="P({{h.name}}|{{selectedConsideration.name}})">
+                        {{likelihood2(h,selectedConsideration)}}<br/>
+                        <span style="color: lightgrey">{{likelihood(h,selectedConsideration)}}</span>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+         </span>
+      </div>
+   </div>
+   <div class="row" style="background: lightgrey">
+      <div class="col-md-12 graphic" >
+         <visualizeposterior val="data"/>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-16">
+         <footer/>
+      </div>
+   </div>
+</div>

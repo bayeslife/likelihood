@@ -1,0 +1,23 @@
+[
+	{
+		"dataset" :"1",
+		"capability":"Online Order Capability2",
+		"description":"Develop web portal presence  or  engage with vendor to deliver",
+		"hypothesis": [
+			{
+				"name":"Buy",
+				"example": {
+
+				}
+			},
+			{
+				"name":"Build"
+
+			}
+		]
+	},
+	{
+		"capability":"Identity Provider"
+	}
+
+]

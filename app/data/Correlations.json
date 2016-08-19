@@ -1,0 +1,15 @@
+[
+	{		
+		"capability":"c1",
+		"hypothesis": "h1",
+		"consideration" : "co1",
+		"correlation" : "true"
+	},
+	{		
+		"capability":"c1",
+		"hypothesis": "h1",
+		"consideration" : "co2",
+		"correlation" : "true"
+	}
+
+]

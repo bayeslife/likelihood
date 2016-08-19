@@ -1,0 +1,26 @@
+[
+	{	
+		"id": "co1",	
+		"name":"Flexibility",
+		"description":"The business requires flexibility rather than an identified solution and is not confident that any vendors solution provides that flexibility.",
+		"measured": "Solution requires agile development due to lack of concise consensus on the form of the solution."
+	},
+	{
+		"id": "co2",	
+		"name":"Specialization",
+		"description":"The  vendors product provides a higher level of service, expertise and capability that enablement can realistically achieve.",
+		"measured": "Large agile point estimates to develop functionality."
+		},
+	{
+		"id": "co3",	
+		"name":"Trialability",
+		"description":"Is it possible to trial a vendors products",
+		"measured": "References to capabilities to trial"
+		},
+	{
+		"id": "co4",	
+		"name":"Market",
+		"description":"Is their a marketplace with multiple vendor offerings available that solve a particular problem and the vendors markets are sufficiently large for an economy of scale that can be passed on in their products.",
+		"measured": "Evidence of competing vendors. Evidence that vendors have large >100 potential customers."
+	}
+]
